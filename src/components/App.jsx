@@ -17,12 +17,6 @@ export class App extends Component {
 
   onFormSubmit = newContact => {
    
-     const identicalContact = this.state.contacts.some(
-       contact => contact.name === newContact.name
-    );
-
-    identicalContact ?
-      alert(`${newContact.name} is already in contacts`) :
     
     this.setState(prevState => {
       newContact.id = nanoid();
@@ -64,7 +58,8 @@ export class App extends Component {
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm onFormSubmit={this.onFormSubmit} />
+        <ContactForm onFormSubmit={this.onFormSubmit} contacts={this.filterContacts()}
+        />
 
         <Filter
           onFilterChange={this.onFilterChange}

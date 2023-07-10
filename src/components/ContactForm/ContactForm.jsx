@@ -15,13 +15,22 @@ export class ContactForm extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
- 
-    this.props.onFormSubmit(this.state);
-    this.reset();
+    const identicalContact = this.props.contacts.some(
+      contact => contact.name === this.state.name
+    );
+
+    identicalContact
+      ? alert(`${this.state.name} is already in contacts`)
+      : this.onIdenticalContact();
   };
 
+  onIdenticalContact() {
+    this.props.onFormSubmit(this.state);
+    this.reset();
+  }
+
   reset = () => {
-    this.setState({ name: '', number: ''});
+    this.setState({ name: '', number: '' });
   };
 
   render() {
