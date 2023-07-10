@@ -1,25 +1,28 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid';
+
 
 export class ContactForm extends Component {
   state = {
     name: '',
-    id: '',
+    number: '',
   };
 
   handleInputChange = event => {
-    this.setState({ name: event.currentTarget.value, id: nanoid() });
+    this.setState({
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state)
-    this.reset()
+ 
+    this.props.onFormSubmit(this.state);
+    this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
-  }
+    this.setState({ name: '', number: ''});
+  };
 
   render() {
     return (
@@ -36,6 +39,20 @@ export class ContactForm extends Component {
             onChange={this.handleInputChange}
           />
         </label>
+
+        <label>
+          Number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={this.state.number}
+            onChange={this.handleInputChange}
+          />
+        </label>
+
         <button type="submit">Add contact</button>
       </form>
     );

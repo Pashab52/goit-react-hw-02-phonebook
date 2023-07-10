@@ -5,7 +5,9 @@ export class ContactItem extends Component {
   
     return (
       <li>
-        <p>{this.props.name}</p>
+        <p>
+          {this.props.name}: {this.props.number}
+        </p>
       </li>
     );
   }
