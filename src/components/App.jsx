@@ -16,8 +16,17 @@ export class App extends Component {
   };
 
   onFormSubmit = newContact => {
+  
+     const identicalContact = this.state.contacts.some(
+       contact => contact.name === newContact.name
+    );
+
+    identicalContact ?
+      alert("zxc") :
+    
     this.setState(prevState => {
       newContact.id = nanoid();
+
 
       return { contacts: [...prevState.contacts, newContact] };
     });
