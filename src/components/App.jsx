@@ -3,6 +3,7 @@ import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
 import { nanoid } from 'nanoid';
+import css from './App.module.css'
 
 export class App extends Component {
   state = {
@@ -35,14 +36,16 @@ export class App extends Component {
   filterContacts() {
 
     const normalizedFilter = this.state.filter.toLowerCase();
- return this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+    return this.state.contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter)
     );
   
   }
 
-  deleteContact() {
-    
+  deleteContact=(id)=> {
+    console.log(id)
+    this.setState(prevState=> ({ contacts: prevState.contacts.filter((contact) => contact.id !== id)}))
+
     
   }
 
@@ -51,19 +54,11 @@ export class App extends Component {
   render() {
 
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <div className={css.phoneContainer}>
         <h1>Phonebook</h1>
-        <ContactForm onFormSubmit={this.onFormSubmit} contacts={this.state.contacts}
+        <ContactForm
+          onFormSubmit={this.onFormSubmit}
+          contacts={this.state.contacts}
         />
 
         <Filter
@@ -73,7 +68,10 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         {this.state.contacts.length > 0 && (
-          <ContactList contacts={this.filterContacts()} />
+          <ContactList
+            contacts={this.filterContacts()}
+            OnBtnDelClick={this.deleteContact}
+          />
         )}
       </div>
     );
