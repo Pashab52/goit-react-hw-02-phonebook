@@ -13,6 +13,7 @@ export class ContactList extends Component {
               name={contact.name}
               number={contact.number}
               key={contact.id}
+              id={contact.id}
             />
           );
         })}

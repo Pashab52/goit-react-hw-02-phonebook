@@ -41,6 +41,11 @@ export class App extends Component {
   
   }
 
+  deleteContact() {
+    
+    
+  }
+
 
 
   render() {
@@ -58,7 +63,7 @@ export class App extends Component {
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm onFormSubmit={this.onFormSubmit} contacts={this.filterContacts()}
+        <ContactForm onFormSubmit={this.onFormSubmit} contacts={this.state.contacts}
         />
 
         <Filter
