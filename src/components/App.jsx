@@ -17,18 +17,18 @@ export class App extends Component {
   };
 
   onFormSubmit = newContact => {
-   
+    const copyNewContact = {...newContact}
     
     this.setState(prevState => {
-      newContact.id = nanoid();
-      return { contacts: [...prevState.contacts, newContact] };
+      copyNewContact.id = nanoid();
+      return { contacts: [...prevState.contacts, copyNewContact] };
     });
   };
 
-  onFilterChange=(event)=> {
+  onFilterChange=(filterWord)=> {
 
   this.setState({
-    filter: event.currentTarget.value
+    filter: filterWord,
   });
   }
 
@@ -39,13 +39,10 @@ export class App extends Component {
     return this.state.contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
     );
-  
   }
 
   deleteContact=(id)=> {
-    console.log(id)
     this.setState(prevState=> ({ contacts: prevState.contacts.filter((contact) => contact.id !== id)}))
-
     
   }
 

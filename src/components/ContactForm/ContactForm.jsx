@@ -29,10 +29,11 @@ export class ContactForm extends Component {
 
     identicalContact
       ? alert(`${this.state.name} is already in contacts`)
-      : this.onIdenticalContact();
+      : this.onNoIdenticalContact();
   };
 
-  onIdenticalContact() {
+  onNoIdenticalContact() {
+    
     this.props.onFormSubmit(this.state);
     this.reset();
   }
